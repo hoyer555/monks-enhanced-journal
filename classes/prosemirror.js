@@ -1,7 +1,6 @@
 import { log, setting, i18n, MonksEnhancedJournal } from '../monks-enhanced-journal.js';
 import { EnhancedJournalSheet } from "../sheets/EnhancedJournalSheet.js";
 import { APSJ } from "../apsjournal.js";
-import { c as toggleMark, S as Schema } from '../../../scripts/vendor.mjs';
 
 export class ProseMirrorPlugin {
 	static getProseMirrorMenuDropDowns(menu, items) {
@@ -31,7 +30,7 @@ export class ProseMirrorPlugin {
 				}
 			}
 
-			let schema = new Schema({ nodes: menu.schema.spec.nodes, marks: menu.schema.spec.marks.append(marks) });
+			let schema = new ProseMirror.Schema({ nodes: menu.schema.spec.nodes, marks: menu.schema.spec.marks.append(marks) });
 			menu.schema.marks.fontsize = schema.marks.fontsize;
 			menu.schema.marks.mejreadaloud = schema.marks.mejreadaloud;
 
@@ -45,7 +44,7 @@ export class ProseMirrorPlugin {
 						style: `font-size: ${fontsize}px;line-height: ${Math.max(24, fontsize)}px`,
 						mark: menu.schema.marks.fontsize,
 						attrs: { fontsize },
-						cmd: toggleMark(menu.schema.marks.fontsize, { fontsize })
+						cmd: ProseMirror.commands.toggleMark(menu.schema.marks.fontsize, { fontsize })
 					}
 				}),
 			};
@@ -98,7 +97,7 @@ export class ProseMirrorPlugin {
 				}
 			}
 
-			let schema = new Schema({ nodes: menu.schema.spec.nodes, marks: menu.schema.spec.marks.append(marks) });
+			let schema = new ProseMirror.Schema({ nodes: menu.schema.spec.nodes, marks: menu.schema.spec.marks.append(marks) });
 			menu.schema.marks.color = schema.marks.color;
 
 			items.splice(5, 0, {

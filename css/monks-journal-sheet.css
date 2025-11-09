@@ -396,7 +396,7 @@ body:not(.system-pf2e) .monks-journal-sheet .sheet-container .tag {
     border: var(--mej-sheet-header-input-border);
     font-size: inherit;
     font-family: inherit;
-    height: calc(var(--font-size-20) + 6);
+    line-height: calc(var(--font-size-20) + 6);
     margin: 0px;
     color: var(--mej-sheet-header-detail-input-color);
     background: var(--mej-sheet-header-input-background);

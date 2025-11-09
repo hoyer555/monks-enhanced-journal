@@ -105,6 +105,25 @@ export class QuestSheet extends EnhancedJournalSheet {
         await game.user.setFlag('monks-enhanced-journal', `reward${this.document.id}`, value);
     }
 
+    _prepareTabs(group) {
+        let tabs = super._prepareTabs(group);
+
+        if (!game.user.isGM) {
+            // Remove any tabs that don't have content if the user isn't a GM
+            let rewards = this.document.getFlag('monks-enhanced-journal', "rewards") || {};
+            if (Object.values(rewards).filter((v) => v.visible).length === 0) {
+                delete tabs.rewards;
+            }
+
+            let objectives = this.document.getFlag('monks-enhanced-journal', "objectives") || {};
+            if (Object.values(objectives).filter((v) => v.available).length === 0) {
+                delete tabs.objectives;
+            }
+        }
+
+        return tabs;
+    }
+
     async _prepareBodyContext(context, options) {
         context = await super._prepareBodyContext(context, options);
 
@@ -180,8 +199,10 @@ export class QuestSheet extends EnhancedJournalSheet {
         context.canxp = game.modules.get("monks-tokenbar")?.active && this.document.isOwner;
 
         context.rewards = Object.values(rewards).map(r => {
+            if (!game.user.isGM && !r.visible)
+                return null;
             return { id: r.id, name: r.name, visible: r.visible, awarded: r.awarded };
-        });
+        }).filter(r => r !== null);
         if (context.rewards.length) {
             context.reward = this.getReward();
         }

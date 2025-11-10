@@ -78,6 +78,7 @@ export class EnhancedJournal extends HandlebarsApplicationMixin(ApplicationV2) {
             toggleViewMode: EnhancedJournal.toggleViewMode,
             navigatePrevious: EnhancedJournal.navigatePrevious,
             navigateNext: EnhancedJournal.navigateNext,
+            activateEntry: EnhancedJournal.activateEntry
         },
         position: { width: 1025, height: 700 },
         form: {
@@ -1746,7 +1747,7 @@ export class EnhancedJournal extends HandlebarsApplicationMixin(ApplicationV2) {
         */
 
         // Entry-level events
-        directory.on("click", ".entry-name", ui.journal._onClickEntry.bind(ui.journal));
+        //directory.on("click", ".entry-name", ui.journal._onClickEntry.bind(ui.journal));
         directory.on("click", ".folder-header", (event) => {
             ui.journal._onToggleFolder.call(this, event.originalEvent, event.currentTarget, { _skipDeprecation:true });
         });
@@ -1811,7 +1812,7 @@ export class EnhancedJournal extends HandlebarsApplicationMixin(ApplicationV2) {
     }
 
     getDocuments() {
-        let folder = this.document.folder;
+        let folder = this.document.folder || this.document.parent?.folder;
         let contents = folder?.contents || game.journal.filter(j => j.folder == null);
 
         let sortingMode = folder?.sorting || ui.journal.collection.sortingMode || "m";
@@ -1853,5 +1854,9 @@ export class EnhancedJournal extends HandlebarsApplicationMixin(ApplicationV2) {
             return;
         let journal = game.journal.get(page.id);
         if (journal) this.open(journal);
+    }
+
+    static activateEntry(event, target) {
+        ui.journal._onClickEntry.call(ui.journal, event, target);
     }
 }

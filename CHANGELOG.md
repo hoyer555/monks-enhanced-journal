@@ -1,3 +1,19 @@
+# Version 13.05
+
+Fixed issue with converting item prices in shop not getting the default values.
+
+Fixed issue when clicking on Directory items within the Enhanced Journal.
+
+Fixed issues with navigating to previous and next journal items.
+
+Added support for Conversation HUD, added conversation to list of available journal types
+
+Ignore Conversation HUD journals when opening Journal Entry.
+
+Fixed issue with Reward currency
+
+Fixed issue with opening currency adjustments
+
 # Version 13.04
 
 Fixing issue with Quest Rewards being shown to players even if visible is turned off

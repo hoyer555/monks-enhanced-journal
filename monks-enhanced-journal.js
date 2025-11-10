@@ -887,6 +887,45 @@ export class MonksEnhancedJournal {
 					return wrapped(...args);
 				}
 			}
+			if (game.modules.get("conversation-hud")?.active && type == "conversation-sheet") {
+				const permissions = {};
+				game.users?.forEach((u) => (permissions[u.id] = game.user?.id === u.id ? 3 : 0));
+
+				document.update({
+					flags: {
+						"core": { sheetClass: "conversation-sheet.ConversationSheet" },
+						"conversation-hud": { type: "conversation-sheet" }
+					},
+                    ownership: permissions
+				});
+
+				let dataToSave = {
+					"type": "gm-controlled",
+					"background": "",
+					"conversation": {
+						"data": {
+							"participants": []
+						},
+						"features": {
+							"isMinimized": false,
+							"isMinimizationLocked": false,
+							"isSpeakingAs": false,
+							"isBackgroundVisible": true
+						}
+					}
+				}
+
+				await document.createEmbeddedDocuments("JournalEntryPage", [
+					{
+						text: { content: JSON.stringify(dataToSave) },
+						name: "_chud_conversation_data",
+						flags: {
+							"conversation-hud": { type: "conversation-sheet-data" },
+						},
+					},
+				]);
+				return false;
+			}
 			if (type) {
 				let subtype = "";
 				if (type.indexOf(":") != -1) {
@@ -915,7 +954,7 @@ export class MonksEnhancedJournal {
 					}, 500);
 				}
 			}
-			if (!!foundry.utils.getProperty(this, "flags.forien-quest-log") || (options.renderSheet !== false && ! await MonksEnhancedJournal.openJournalEntry(this, options)))
+			if (!!foundry.utils.getProperty(this, "flags.forien-quest-log") || (options.renderSheet !== false && !await MonksEnhancedJournal.openJournalEntry(this, options)))
 				return wrapped(...args);
 		}, "MIXED");
 
@@ -2280,6 +2319,9 @@ export class MonksEnhancedJournal {
 				return false;
 		}
 
+		if (game.modules.get('conversation-hud')?.active && doc?.getFlag("conversation-hud", "type") == "conversation-sheet")
+            return false;
+
 		if (doc) {
 			if (doc.content?.includes('QuickEncountersTutorial'))
 				return false;
@@ -3182,6 +3224,12 @@ export class MonksEnhancedJournal {
 				if (type == "base" || type == "oldentry") type = "journalentry";
 				if (types[type])
 					docIcon = MonksEnhancedJournal.getIcon(type);
+				else {
+					type = document.pages.contents[0].getFlag('conversation-hud', 'type');
+					if (type == "conversation-sheet-data") {
+                        docIcon = "fa-comments";
+					}
+				}
 			}
 
 			if ($('.entry-name .journal-type', this).length)
@@ -4914,6 +4962,11 @@ Hooks.on("renderDialogV2", (dialog, html, data) => {
 
 		if (game.modules.get("storyteller")?.active) {
 			select.append($('<optgroup>').attr("label", "Storyteller").append(Object.entries(game.StoryTeller.constructor.types).filter(([k, v]) => k != "base").map(([k, v]) => { return $('<option>').attr('value', k).html(v.name); })));
+			$('select[name="type"]', html).parent().parent().remove();
+		}
+
+		if (game.modules.get("conversation-hud")?.active) {
+			select.append($('<optgroup>').attr("label", "Conversation HUD").append($('<option>').attr('value', "conversation-sheet").html("Conversation")));
 			$('select[name="type"]', html).parent().parent().remove();
 		}
 

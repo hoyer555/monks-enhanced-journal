@@ -870,7 +870,8 @@ export class ShopSheet extends EnhancedJournalSheet {
                 delete formData.adjustment[k];
         }
 
-        let adjustment = Object.assign({}, setting("adjustment-defaults"), formData.adjustment || {});
+        let settingDefaults = setting("adjustment-defaults") || {};
+        let adjustment = foundry.utils.mergeObject(settingDefaults, formData.adjustment || {});
 
         let items = this.options.document.getFlag('monks-enhanced-journal', 'items') || {};
 

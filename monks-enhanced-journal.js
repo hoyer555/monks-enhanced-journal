@@ -184,6 +184,21 @@ export class MonksEnhancedJournal {
         return MEJHelpers.getPrice(price);
     }
 
+    static getItemDetails(item) {
+        let name = item.name;
+        let img = item.img;
+
+        let identifiedName = name;
+        if (item.system?.identification?.status == "unidentified") {
+            name = item.system?.identification.unidentified.name || name;
+            img = item.system?.identification.unidentified.img || img;
+        } else if (item.system?.identified === false) {
+            name = item.system?.unidentified?.name || name;
+        }
+
+        return { name, img, identifiedName };
+    }
+
     static getMEJType(journal) {
         let type = getProperty(journal?.pages?.contents[0], "flags.monks-enhanced-journal.type") || getProperty(journal, "flags.monks-enhanced-journal.type");
         if (((journal instanceof JournalEntry && journal?.pages?.size == 1) || journal instanceof JournalEntryPage) && !!type) {

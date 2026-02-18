@@ -3,7 +3,7 @@ name: Create Repository Zip
 on:
   push:
     tags:
-      - 'v*' # Si attiva per ogni tag che inizia con 'v' (es. v1.0)
+      - '*' # Si attiva per ogni tag che inizia con 'v' (es. v1.0)
   workflow_dispatch: # Ti permette di avviarlo manualmente
 
 jobs:

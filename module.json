@@ -36,19 +36,9 @@
       "path": "lang/fr.json"
     },
     {
-      "lang": "ja",
-      "name": "日本語",
-      "path": "lang/ja.json"
-    },
-    {
       "lang": "sv",
       "name": "Svenska",
       "path": "lang/sv.json"
-    },
-    {
-      "lang": "zh-tw",
-      "name": "正體中文",
-      "path": "lang/zh-tw.json"
     },
     {
       "lang": "de",

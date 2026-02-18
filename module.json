@@ -36,9 +36,19 @@
       "path": "lang/fr.json"
     },
     {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
+    },
+    {
       "lang": "sv",
       "name": "Svenska",
       "path": "lang/sv.json"
+    },
+    {
+      "lang": "zh-tw",
+      "name": "正體中文",
+      "path": "lang/zh-tw.json"
     },
     {
       "lang": "de",
@@ -84,17 +94,17 @@
     "css/system.css",
     "css/apsjournal.css"
   ],
-  "url": "https://github.com/ironmonk88/monks-enhanced-journal",
-  "download": "https://github.com/ironmonk88/monks-enhanced-journal/archive/11.11.zip",
-  "manifest": "https://github.com/ironmonk88/monks-enhanced-journal/releases/latest/download/module.json",
-  "bugs": "https://github.com/ironmonk88/monks-enhanced-journal/issues",
+  "url": "https://github.com/hoyer555/monks-enhanced-journal",
+  "download": "https://github.com/hoyer555/monks-enhanced-journal/archive/11.12.zip",
+  "manifest": "https://github.com/hoyer555/monks-enhanced-journal/blob/11.12/module.json",
+  "bugs": "https://github.com/hoyer555/monks-enhanced-journal/issues",
   "allowBugReporter": true,
-  "id": "monks-enhanced-journal",
+  "id": "monks-enhanced-journal-custom",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
   },
-  "name": "monks-enhanced-journal",
+  "name": "monks-enhanced-journal-custom",
   "minimumCoreVersion": "11",
   "compatibleCoreVersion": "11"
 }

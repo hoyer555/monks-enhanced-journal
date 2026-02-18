@@ -7,7 +7,7 @@ import { APSJ } from "./apsjournal.js";
 
 export const registerSettings = function () {
 	// Register any custom module settings here
-	let modulename = "monks-enhanced-journal";
+	let modulename = "monks-enhanced-journal-custom";
 
 	let rollingmodules = {
 		'monks-tokenbar': "Monk's TokenBar"

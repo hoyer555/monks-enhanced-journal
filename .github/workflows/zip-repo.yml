@@ -1,0 +1,27 @@
+name: Create Repository Zip
+
+on:
+  push:
+    tags:
+      - 'v*' # Si attiva per ogni tag che inizia con 'v' (es. v1.0)
+  workflow_dispatch: # Ti permette di avviarlo manualmente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Passaggio 1: Scarica il codice del repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Passaggio 2: Crea l'archivio ZIP
+      - name: Zip Folder
+        run: zip -r archive.zip . -x ".git/*" ".github/*"
+
+      # Passaggio 3: Carica lo ZIP come "artifact"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mio-progetto-zippato
+          path: 11.12.zip

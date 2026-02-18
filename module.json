@@ -99,12 +99,12 @@
   "manifest": "https://github.com/hoyer555/monks-enhanced-journal/blob/11.12/module.json",
   "bugs": "https://github.com/hoyer555/monks-enhanced-journal/issues",
   "allowBugReporter": true,
-  "id": "monks-enhanced-journal-custom",
+  "id": "monks-enhanced-journal",
   "compatibility": {
     "minimum": "11",
     "verified": "11"
   },
-  "name": "monks-enhanced-journal-custom",
+  "name": "monks-enhanced-journal",
   "minimumCoreVersion": "11",
   "compatibleCoreVersion": "11"
 }

@@ -1269,23 +1269,14 @@ export class EnhancedJournalSheet extends JournalPageSheet {
             if (flags.cost != undefined)
                 cost = MEJHelpers.getPrice(flags.cost);
 
-            let name = item.name;
-            let img = item.img;
-
-            let identifiedName = name;
-            if (item.system?.identification?.status == "unidentified") {
-                name = item.system?.identification.unidentified.name || name;
-                img = item.system?.identification.unidentified.img || img;
-            } else if (item.system?.identified === false) {
-                name = item.system?.unidentified?.name || name;
-            }
+            let details = MonksEnhancedJournal.getItemDetails(item);
 
             let itemData = {
                 id: item._id,
-                name: name,
-                identifiedname: game.user.isGM && identifiedName != name ? identifiedName : null,
+                name: details.name,
+                identifiedname: game.user.isGM && details.identifiedName != details.name ? details.identifiedName : null,
                 type: item.type,
-                img: img,
+                img: details.img,
                 hide: flags.hide,
                 lock: flags.lock,
                 consumable: flags.consumable,

@@ -1274,8 +1274,8 @@ export class EnhancedJournalSheet extends JournalPageSheet {
             let itemData = {
                 id: item._id,
                 name: details.name,
-                identifiedName: identifiedName,
-                identified: identified,
+                identifiedName: details.identifiedName,
+                identified: details.identified,
                 showIdentification: game.user.isGM || this.object.isOwner,
                 type: item.type,
                 img: details.img,

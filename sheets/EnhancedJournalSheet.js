@@ -1276,7 +1276,7 @@ export class EnhancedJournalSheet extends JournalPageSheet {
                 name: details.name,
                 identifiedName: details.identifiedName,
                 identified: details.identified,
-                showIdentification: game.user.isGM || this.object.isOwner,
+                showIdentification: game.user.isGM || this.object.parent.isOwner,
                 type: item.type,
                 img: details.img,
                 hide: flags.hide,

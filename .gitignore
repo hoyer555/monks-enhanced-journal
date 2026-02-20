@@ -1,7 +1,3 @@
 .vs/
 .svn/
-/.idea/.gitignore
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/monks-enhanced-journal.iml
-/.idea/vcs.xml
+/.idea/*
